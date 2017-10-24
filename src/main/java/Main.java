@@ -3,8 +3,8 @@ import log.Log;
 
 public class Main {
     public static void main(String args[]){
-        int dataSwitch = 1;
-        Log.init("highPopSize",dataSwitch);
+        int dataSwitch = 3;
+        Log.init("TwoPointSplice",dataSwitch);
         new Thread(new Population(50, 1000, dataSwitch)).start();
     }
 }
