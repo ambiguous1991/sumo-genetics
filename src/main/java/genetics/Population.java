@@ -3,6 +3,7 @@ package genetics;
 import algorithms.MutationAlgorithm;
 import algorithms.SplicePopulationAlgorithm;
 import algorithms.TournamentSelectionAlgorithm;
+import algorithms.TwoPointSplicePopulationAlgorithm;
 import log.Log;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -50,7 +51,7 @@ public class Population implements Runnable{
         evaluatePopulation("BEGINNING");
         while(FFECounter<FFETarget){
             population = TournamentSelectionAlgorithm.select(population);
-            population = SplicePopulationAlgorithm.splice(population, spliceProb);
+            population = TwoPointSplicePopulationAlgorithm.splice(population, spliceProb);
             evaluatePopulation("FITNESS");
 
             findGlobalBest();
