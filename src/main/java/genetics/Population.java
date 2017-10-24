@@ -1,5 +1,6 @@
 package genetics;
 
+import algorithms.EqualSplicePopulationAlgorithm;
 import algorithms.MutationAlgorithm;
 import algorithms.SplicePopulationAlgorithm;
 import algorithms.TournamentSelectionAlgorithm;
@@ -50,7 +51,7 @@ public class Population implements Runnable{
         evaluatePopulation("BEGINNING");
         while(FFECounter<FFETarget){
             population = TournamentSelectionAlgorithm.select(population);
-            population = SplicePopulationAlgorithm.splice(population, spliceProb);
+            population = EqualSplicePopulationAlgorithm.splice(population, spliceProb);
             evaluatePopulation("FITNESS");
 
             findGlobalBest();

@@ -53,43 +53,27 @@ public class EqualSplicePopulationAlgorithm {
     }
 
     public static void splice(Specimen a, Specimen b, ArrayList<Specimen> product){
-        int splicePoint = (int) Math.round(random.nextDouble() * (double)a.getGenome().size());
+        ArrayList<Gene> productA = new ArrayList<>();
+        ArrayList<Gene> productB = new ArrayList<>();
 
-        if(splicePoint==0||splicePoint==a.getGenome().size()){
-            a = a.clone();
-            b = b.clone();
-            a.setChanged(false);
-            b.setChanged(false);
-            product.add(a);
-            product.add(b);
+        for (int i=0; i<a.getGenome().size();i++){
+            if(i%2==0){
+                productA.add(b.getGenome().get(i));
+                productB.add(a.getGenome().get(i));
+            }
+            else{
+                productA.add(a.getGenome().get(i));
+                productB.add(b.getGenome().get(i));
+            }
         }
-        else{
-            ArrayList<Gene> genesTempA1 = new ArrayList<>();
-            ArrayList<Gene> genesTempA2 = new ArrayList<>();
-            ArrayList<Gene> genesTempB1 = new ArrayList<>();
-            ArrayList<Gene> genesTempB2 = new ArrayList<>();
-            genesTempA1.addAll(a.getGenome().subList(0, splicePoint));
-            genesTempA2.addAll(a.getGenome().subList(splicePoint, a.getGenome().size()));
-            genesTempB1.addAll(b.getGenome().subList(0, splicePoint));
-            genesTempB2.addAll(b.getGenome().subList(splicePoint, b.getGenome().size()));
 
-            ArrayList<Gene> productA = new ArrayList<>();
-            ArrayList<Gene> productB = new ArrayList<>();
+        Specimen specimenA = new Specimen();
+        specimenA.setGenome(productA);
 
-            productA.addAll(genesTempA1);
-            productA.addAll(genesTempB2);
+        Specimen specimenB = new Specimen();
+        specimenB.setGenome(productB);
 
-            productB.addAll(genesTempB1);
-            productB.addAll(genesTempA2);
-
-            Specimen specimenA = new Specimen();
-            specimenA.setGenome(productA);
-
-            Specimen specimenB = new Specimen();
-            specimenB.setGenome(productB);
-
-            product.add(specimenA);
-            product.add(specimenB);
-        }
+        product.add(specimenA);
+        product.add(specimenB);
     }
 }
