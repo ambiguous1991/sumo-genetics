@@ -48,24 +48,17 @@ public class Population implements Runnable{
 
     private void mainLoop(){
         createPopulation();
-        evaluatePopulation("BEGINNING");
-        while(FFECounter<FFETarget){
-            population = TournamentSelectionAlgorithm.select(population);
-            population = EqualSplicePopulationAlgorithm.splice(population, spliceProb);
-            evaluatePopulation("FITNESS");
 
-            findGlobalBest();
-            findGenerationsBest();
-            findGenerationsWorst();
-            findMeanAndDeviation();
+        findGlobalBest();
+        findGenerationsBest();
+        findGenerationsWorst();
+        findMeanAndDeviation();
 
-            MutationAlgorithm.mutate(population, mutationProb);
+        evaluatePopulation("FITNESS");
 
-            evaluatePopulation("AFTER MUTATION");
+        Log.info("End of generation "+generationNo);
+        generationNo++;
 
-            Log.info("End of generation "+generationNo);
-            generationNo++;
-        }
         Log.close();
     }
 
