@@ -5,6 +5,7 @@ import genetics.Specimen;
 import log.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Shuffler {
@@ -26,6 +27,7 @@ public class Shuffler {
     }
 
     public void shuffle(ArrayList<Specimen> population){
+        Log.log("SHUFFLER", Arrays.toString(pattern.toArray()));
         for(Specimen s: population){
             shuffle(s);
         }
@@ -38,7 +40,9 @@ public class Shuffler {
         for (int i=0; i<genome.size(); i++){
             product.add(genome.get(pattern.get(i)));
         }
+        Log.log("SHUFFLER", "Shuffling;"+spec.toString());
         spec.setGenome(product);
+        Log.log("SHUFFLER", "After shuffling;"+spec.toString());
     }
 
     public void unshuffle(ArrayList<Specimen> population){
@@ -47,7 +51,9 @@ public class Shuffler {
         }
     }
 
-    private void unshuffle(Specimen s){
-        Collections.sort(s.getGenome());
+    private void unshuffle(Specimen spec){
+        Log.log("SHUFFLER", "Unshuffling;"+spec.toString());
+        Collections.sort(spec.getGenome());
+        Log.log("SHUFFLER", "After unshuffling;"+spec.toString());
     }
 }
