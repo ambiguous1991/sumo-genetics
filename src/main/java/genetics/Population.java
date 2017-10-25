@@ -1,5 +1,6 @@
 package genetics;
 
+import algorithms.EqualSplicePopulationAlgorithm;
 import algorithms.MutationAlgorithm;
 import algorithms.Shuffler;
 import algorithms.SplicePopulationAlgorithm;
@@ -50,7 +51,7 @@ public class Population implements Runnable{
         createPopulation();
         Shuffler shuffler = new Shuffler(determinedGenome.size());
         evaluatePopulation("BEGINNING");
-        while(FFECounter<FFETarget){
+        while(FFECounter<FFETarget) {
             shuffler.shuffle(population);
             population = TournamentSelectionAlgorithm.select(population);
             population = SplicePopulationAlgorithm.splice(population, spliceProb);
@@ -65,10 +66,8 @@ public class Population implements Runnable{
             MutationAlgorithm.mutate(population, mutationProb);
             shuffler.unshuffle(population);
             evaluatePopulation("AFTER MUTATION");
-
-            Log.info("End of generation "+generationNo);
-            generationNo++;
         }
+
         Log.close();
     }
 

@@ -78,7 +78,7 @@ public class SplicePopulationAlgorithmTest {
         b.setGenome(genesB);
 
         ArrayList<Specimen> product = new ArrayList<>();
-        TwoPointSplicePopulationAlgorithm.splice(a,b, product);
+        EqualSplicePopulationAlgorithm.splice(a,b, product);
 
         System.out.println("Input a"+a);
         System.out.println("Input b"+b);
