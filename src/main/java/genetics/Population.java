@@ -5,6 +5,7 @@ import algorithms.MutationAlgorithm;
 import algorithms.Shuffler;
 import algorithms.SplicePopulationAlgorithm;
 import algorithms.TournamentSelectionAlgorithm;
+import algorithms.TwoPointSplicePopulationAlgorithm;
 import log.Log;
 import org.jdom2.Document;
 import org.jdom2.Element;
