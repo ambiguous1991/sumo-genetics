@@ -2,10 +2,10 @@ package genetics;
 
 import java.util.Random;
 
-public class Gene {
+public class Gene implements Comparable<Gene>{
     private static Random random = new Random();
     private String id;
-    private int order, minVal, maxVal;
+    private int order, minVal, maxVal, generalOrder;
     private int value;
 
     public Gene(String id, int order, int minVal, int maxVal){
@@ -30,6 +30,7 @@ public class Gene {
     protected Gene clone() {
         Gene clone = new Gene(id, order, minVal, maxVal);
         clone.value = value;
+        clone.generalOrder = generalOrder;
         return clone;
     }
 
@@ -68,5 +69,20 @@ public class Gene {
             return equal.value==value&&equal.maxVal==maxVal&&equal.minVal==minVal&&equal.order==order&&equal.id.equals(id);
         }
         return false;
+    }
+
+    public void setGeneralOrder(int generalOrder) {
+        this.generalOrder = generalOrder;
+    }
+
+    public int getGeneralOrder() {
+        return generalOrder;
+    }
+
+    @Override
+    public int compareTo(Gene gene) {
+        if(generalOrder>gene.generalOrder) return 1;
+        else if (generalOrder==gene.generalOrder) return 0;
+        else return -1;
     }
 }

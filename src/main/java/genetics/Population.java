@@ -1,6 +1,7 @@
 package genetics;
 
 import algorithms.MutationAlgorithm;
+import algorithms.Shuffler;
 import algorithms.SplicePopulationAlgorithm;
 import algorithms.TournamentSelectionAlgorithm;
 import log.Log;
@@ -47,20 +48,22 @@ public class Population implements Runnable{
 
     private void mainLoop(){
         createPopulation();
+        Shuffler shuffler = new Shuffler(determinedGenome.size());
         evaluatePopulation("BEGINNING");
         while(FFECounter<FFETarget){
-            Shuffler.shuffle(population);
+            shuffler.shuffle(population);
             population = TournamentSelectionAlgorithm.select(population);
             population = SplicePopulationAlgorithm.splice(population, spliceProb);
+            shuffler.unshuffle(population);
             evaluatePopulation("FITNESS");
-
+            shuffler.shuffle(population);
             findGlobalBest();
             findGenerationsBest();
             findGenerationsWorst();
             findMeanAndDeviation();
 
             MutationAlgorithm.mutate(population, mutationProb);
-
+            shuffler.unshuffle(population);
             evaluatePopulation("AFTER MUTATION");
 
             Log.info("End of generation "+generationNo);
@@ -98,8 +101,10 @@ public class Population implements Runnable{
             }
             Log.info("Determined genome lenght is "+genomeLength);
             Log.info("Determined genome: ");
-            for(Gene gene: determinedGenome){
-                Log.info(gene.getId()+", "+gene.getOrder()+" from "+gene.getMinVal()+" to "+gene.getMaxVal());
+            for(int i=0; i<determinedGenome.size(); i++){
+                Gene gene = determinedGenome.get(i);
+                determinedGenome.get(i).setGeneralOrder(i);
+                Log.info(gene.getId()+", general order "+gene.getGeneralOrder()+", "+gene.getOrder()+" from "+gene.getMinVal()+" to "+gene.getMaxVal());
             }
 
             for (int i=0; i<populationSize; i++){
