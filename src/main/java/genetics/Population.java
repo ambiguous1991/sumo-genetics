@@ -49,6 +49,7 @@ public class Population implements Runnable{
         createPopulation();
         evaluatePopulation("BEGINNING");
         while(FFECounter<FFETarget){
+            Shuffler.shuffle(population);
             population = TournamentSelectionAlgorithm.select(population);
             population = SplicePopulationAlgorithm.splice(population, spliceProb);
             evaluatePopulation("FITNESS");
