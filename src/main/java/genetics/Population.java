@@ -67,6 +67,8 @@ public class Population implements Runnable{
             MutationAlgorithm.mutate(population, mutationProb);
             shuffler.unshuffle(population);
             evaluatePopulation("AFTER MUTATION");
+
+            generationNo++;
         }
 
         Log.close();
