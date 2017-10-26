@@ -50,9 +50,9 @@ public class Population implements Runnable{
 
     private void mainLoop(){
         createPopulation();
-        Shuffler shuffler = new Shuffler(determinedGenome.size());
+        //Shuffler shuffler = new Shuffler(determinedGenome.size());
         evaluatePopulation("BEGINNING");
-        while(FFECounter<FFETarget) {
+        /*while(FFECounter<FFETarget) {
             shuffler.shuffle(population);
             population = TournamentSelectionAlgorithm.select(population);
             population = SplicePopulationAlgorithm.splice(population, spliceProb);
@@ -69,7 +69,7 @@ public class Population implements Runnable{
             evaluatePopulation("AFTER MUTATION");
 
             generationNo++;
-        }
+        }*/
 
         Log.close();
     }
